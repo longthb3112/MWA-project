@@ -13,6 +13,14 @@ const auth = async (req, res, next) => {
             const decoded = jwt.verify(token, applicationConstant.JWT_TOKEN_KEY);
             const user = await User.findOne({ _id: decoded._id, 'tokens.token': token })
 
+
+
+
+
+
+
+
+
             if (!user) {
                 res.json(new Response(null, 'Unauthenticated User', 403))
             } else {
