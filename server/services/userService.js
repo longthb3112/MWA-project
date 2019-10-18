@@ -1,0 +1,65 @@
+const User = require('../models/user');
+const ObjectId = require('mongodb').ObjectID;
+const Response = require('../dto/response');
+
+module.exports.addNewUser = async () => {
+    const user = new User({
+        firstName: 'Long',
+        lastName: 'Tran'
+    });
+    await user.save();
+
+}
+
+module.exports.findAllUsers = async (req, res) => {
+    const users = await User.find({});
+    res.json(users);
+}
+
+module.exports.login = async (req, res) => {
+    try {
+        const user = await User.findByCredentials(req.body.username, req.body.password)
+        let tokens = await user.generateAuthToken();
+        let data = { token: tokens, name: (user.lastname + ' ' + user.firstname), username: user.username };
+        res.json(new Response(data));
+    } catch (e) {
+        res.json(new Response(null, "Username or password mismatch", 403));
+    }
+}
+
+module.exports.signup = async (req, res) => {
+    const user = new User(req.body)
+    try {
+        await user.save();
+        await user.generateAuthToken();
+        res.json(new Response(user));
+    } catch (e) {
+        res.json(new Response(null, "Error saving user\n" + e.message, 500));
+    }
+}
+
+module.exports.getUserByUsername = async (req, res) => {
+    let param = req.params.id;
+    const user = await User.findOne({ 'username': param });
+    user.password = "";
+    user.tokens = "";
+    res.json(new Response(user));
+}
+
+module.exports.updateUser = async (req, res) => {
+    let data = req.body;
+    let user = await User.findOne({ 'username': data.username });
+
+    if (user) {
+        try {
+            user.email = data.email;
+            user.firstname = data.firstname;
+            user.lastname = data.lastname;
+            
+            user.save();
+            res.json(new Response(true));
+        } catch (e) {
+            res.json(new Response(null, 'Cannot update user', 500));
+        }
+    }
+}
