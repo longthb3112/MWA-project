@@ -1,5 +1,4 @@
 const User = require('../models/user');
-const ObjectId = require('mongodb').ObjectID;
 const Response = require('../dto/response');
 
 module.exports.addNewUser = async () => {
@@ -55,11 +54,105 @@ module.exports.updateUser = async (req, res) => {
             user.email = data.email;
             user.firstname = data.firstname;
             user.lastname = data.lastname;
-            
+
             user.save();
             res.json(new Response(true));
         } catch (e) {
             res.json(new Response(null, 'Cannot update user', 500));
         }
+    } else {
+        res.json(new Response(null, 'no username found', 500));
     }
+}
+
+module.exports.addTask = async (req, res) => {
+    let data = req.body;
+    let user = await User.findOne({ 'username': data.username });
+
+    if (user) {
+
+
+        try {
+
+            user.tasks.push(data.task);
+
+            user.save();
+            res.json(new Response(true));
+        } catch (e) {
+            res.json(new Response(null, 'Cannot update user', 500));
+        }
+    } else {
+        res.json(new Response(null, 'Cannot update Task No user Found', 500));
+    }
+
+}
+
+module.exports.removeTaskById = async (req, res) => {
+    let data = req.body;
+    let user = await User.findOne({ 'username': data.username });
+
+
+    if (user) {
+
+
+        try {
+
+            user.tasks.pull(data.taskId);
+
+
+            user.save();
+            res.json(new Response(true));
+        } catch (e) {
+            res.json(new Response(null, 'Cannot update user', 500));
+        }
+    } else {
+        res.json(new Response(null, 'Cannot remove Task No user Found', 500));
+    }
+
+}
+
+
+module.exports.editTaskById = async (req, res) => {
+
+
+    try {
+        await User.updateOne({ 'username': req.body.username, "tasks._id": req.body.taskId },
+            {
+                $set: {
+                    "tasks.$.description": req.body.description,
+                    "tasks.$.name": req.body.name,
+                    "tasks.$.priority": req.body.priority,
+                    "tasks.$.duedate": req.body.duedate
+
+                }
+            }
+        );
+
+
+
+        res.json(new Response(true));
+    } catch (e) {
+        res.json(new Response(null, 'Cannot update user', 500));
+    }
+
+
+}
+
+
+
+module.exports.findAllTasks = async (req, res) => {
+    let data = req.body;
+    let user = await User.findOne({ 'username': data.username });
+    if (user) {
+
+
+        try {
+            res.json(user.tasks);
+        } catch (e) {
+            res.json(new Response(null, 'Cannot update user', 500));
+        }
+    } else {
+        res.json(new Response(null, 'Cannot remove Task No user Found', 500));
+    }
+
 }
