@@ -17,7 +17,7 @@ content-type:application/json
     "username":"suresh",
     "firstname":"suresh",
     "lastname":"prajapati",
-    "email":"email1@gmail.com",
+    "email":"email5@gmail.com",
     "password":"1234",
     "imageUrl":"profile-pics/profile-pic01.png",
     "description":"short description about user",
@@ -78,8 +78,6 @@ Content-Type:application/json
    "duedate":"2019-12-12"
 }
 
-
-
 ###
 GET http://localhost:8000/api/useralltasks
 Content-Type:application/json
@@ -93,7 +91,7 @@ GET http://localhost:8000/api/usertask/findbyname
 content-type: application/json
 
 {
-    "username": "sunena",
+    "username": "suresh",
     "taskName": "task2"
 }
 
@@ -102,8 +100,8 @@ GET http://localhost:8000/api/usertask/findbyduedate
 content-type: application/json
 
 {
-    "username": "sunena",
-    "due": "2019-10-20"
+    "username": "suresh",
+    "due": "2019-10-29"
 }
 
 ###

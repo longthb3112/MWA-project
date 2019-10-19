@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 declare interface TaskData {
     headerRow: string[];
@@ -12,8 +13,17 @@ declare interface TaskData {
 })
 
 export class TaskComponent implements OnInit{
+    constructor(private userService:UserService){
+
+    }
     public tableData1: TaskData;
     public tableData2: TaskData;
+    user = {
+        username: '',
+        email: '',
+        firstname: '',
+        lastname: ''
+      };
     ngOnInit(){
         this.tableData1 = {
             headerRow: [ 'ID', 'Name', 'Country', 'City', 'Salary'],
@@ -37,5 +47,12 @@ export class TaskComponent implements OnInit{
                 ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
             ]
         };
+       
+        this.userService.getUserdetail().subscribe(res => {
+            if (res.status == 'OK') {
+              this.user = res.data;
+              console.log(this.user);
+            }
+          });
     }
 }

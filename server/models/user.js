@@ -9,11 +9,11 @@ const taskSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
-        trim: true
+        trim: true,
+        sparse: true
     },
     description:{
         type: String,
-        unique: true,
         required: true,
         trim: true
     },
@@ -23,6 +23,10 @@ const taskSchema = new mongoose.Schema({
     },
     duedate:{
         type:Date
+    },
+    status:{
+        type:Number,
+        default: 0
     }
    
 });
@@ -79,7 +83,8 @@ const userSchema = new mongoose.Schema({
             required: true
         }
     }],
-    tasks:[taskSchema]
+    tasks:[taskSchema],
+    roles:[]
 });
 
 userSchema.methods.generateAuthToken = async function () {

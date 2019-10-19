@@ -16,11 +16,12 @@
     "mongoose": "^5.7.1",
     "node-cron": "^2.0.3",
     "node-fetch": "^2.6.0",
-    "nodemon": "^1.19.4",
     "rxjs": "^6.5.3",
     "validator": "^11.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

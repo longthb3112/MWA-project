@@ -127,9 +127,6 @@ module.exports.editTaskById = async (req, res) => {
                 }
             }
         );
-
-
-
         res.json(new Response(true));
     } catch (e) {
         res.json(new Response(null, 'Cannot update user', 500));
@@ -213,6 +210,6 @@ module.exports.findTaskByPriority = async (req, res) => {
         res.json(result);
     }
     else
-        res.json(new Response(null, "User n   ot found", 500));
+        res.json(new Response(null, "User not found", 500));
 
 }

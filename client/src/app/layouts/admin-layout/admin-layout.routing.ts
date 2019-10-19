@@ -4,10 +4,15 @@ import { UserComponent } from '../../pages/user/user.component';
 import { TaskComponent } from '../../pages/task/task.component';
 import { TypographyComponent } from '../../pages/typography/typography.component';
 import { NotificationsComponent } from '../../pages/notifications/notifications.component';
+import { AuthGuard } from '../../services/auth.guard.service';
+import { LoginComponent } from '../../components/login/login.component';
+import { SignupComponent } from '../../components/signup/signup.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'task',          component: TaskComponent },
-    { path: 'user',           component: UserComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'notifications',  component: NotificationsComponent }
+    { path: 'task',          component: TaskComponent,  canActivate:[AuthGuard]},
+    { path: 'user',           component: UserComponent , canActivate:[AuthGuard]},
+    { path: 'typography',     component: TypographyComponent , canActivate: [AuthGuard]},
+    { path: 'notifications',  component: NotificationsComponent , canActivate:[AuthGuard]},
+    { path: 'login', component: LoginComponent},
+    { path: 'signup', component: SignupComponent},
 ];
