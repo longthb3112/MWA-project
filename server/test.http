@@ -88,3 +88,32 @@ Content-Type:application/json
     "username":"suresh"
 }
 
+###
+GET http://localhost:8000/api/usertask/findbyname
+content-type: application/json
+
+{
+    "username": "sunena",
+    "taskName": "task2"
+}
+
+###
+GET http://localhost:8000/api/usertask/findbyduedate
+content-type: application/json
+
+{
+    "username": "sunena",
+    "due": "2019-10-20"
+}
+
+###
+GET http://localhost:8000/api/usertask1/findbypriority
+content-type: application/json
+
+{
+    "username": "sunena",
+    "priority": 1
+}
+
+###
+GET http://localhost:8000/api/user/sunena
