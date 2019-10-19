@@ -9,6 +9,7 @@ module.exports.addNewUser = async () => {
     });
     await user.save();
 
+
 }
 
 module.exports.findAllUsers = async (req, res) => {
