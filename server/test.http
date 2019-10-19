@@ -5,7 +5,7 @@ POST http://localhost:8000/api/login
 content-type: application/json
 
 {
-    "username": "user1",
+    "username": "sunena",
     "password": "1234"
 }
 
@@ -14,15 +14,64 @@ POST http://localhost:8000/api/signup
 content-type:application/json
 
 {
-    "username":"user4",
-    "firstname":"long2",
-    "lastname":"tran2",
+    "username":"sunena",
+    "firstname":"sunena",
+    "lastname":"gwachha",
     "email":"email4@gmail.com",
     "password":"1234",
     "tasks":[
         {
-            "name": "task12",
-            "description":"task 2 description"
+            "name": "task1",
+            "description":"task 1 description",
+            "priority":2,
+            "duedate":"2019-10-20"
+        },
+          {
+            "name": "task2",
+            "description":"task 2 description",
+            "priority":2,
+            "duedate":"2019-10-20"
+        },
+          {
+            "name": "task3",
+            "description":"task 3 description",
+            "duedate":"2019-10-09"
+        },  {
+            "name": "task4",
+            "description":"task 4 description",
+            "duedate":"2019-10-27"
+        },  {
+            "name": "task5",
+            "description":"task 5 description",
+            "priority":3,
+            "duedate":"2019-10-29"
         }
     ]
+}
+
+###
+GET http://localhost:8000/api/usertask/findbyname
+content-type: application/json
+
+{
+    "username": "sunena",
+    "taskName": "task2"
+}
+
+###
+GET http://localhost:8000/api/usertask/findbyduedate
+content-type: application/json
+
+{
+    "username": "sunena",
+    "due": "2019-10-20"
+}
+
+###
+GET http://localhost:8000/api/usertask1/findbypriority
+content-type: application/json
+
+{
+    "username": "sunena",
+    "priority": 1
 }

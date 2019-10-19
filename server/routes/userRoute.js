@@ -7,6 +7,10 @@ router.post('/signup', userController.signup);
 router.get('/user/:id', userController.getUserByUsername);
 router.put('/user', userController.updateUser);
 router.get('/users', userController.findAllUsers);
+router.get('/usertask/findbyname', userController.findTaskByName);
+router.get('/usertask/findbyduedate', userController.findTaskByDueDate);
+router.get('/usertask1/findbypriority', userController.findTaskByPriority);
+
 module.exports = router;
 
 

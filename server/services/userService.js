@@ -41,9 +41,13 @@ module.exports.signup = async (req, res) => {
 module.exports.getUserByUsername = async (req, res) => {
     let param = req.params.id;
     const user = await User.findOne({ 'username': param });
-    user.password = "";
-    user.tokens = "";
-    res.json(new Response(user));
+    if (user) {
+        user.password = "";
+        user.tokens = "";
+        res.json(new Response(user));
+    }
+    else
+        res.json(new Response(null, "User not found", 500));
 }
 
 module.exports.updateUser = async (req, res) => {
@@ -55,7 +59,7 @@ module.exports.updateUser = async (req, res) => {
             user.email = data.email;
             user.firstname = data.firstname;
             user.lastname = data.lastname;
-            
+
             user.save();
             res.json(new Response(true));
         } catch (e) {
@@ -63,3 +67,67 @@ module.exports.updateUser = async (req, res) => {
         }
     }
 }
+
+module.exports.findTaskByName = async (req, res) => {
+    let data = req.body;
+
+    const user = await User.findOne({ 'username': data.username });
+    const result = [];
+    if (user) {
+        for (let task of user.tasks) {
+            if (task.name === data.taskName) {
+                result.push(task);
+            }
+        }
+        res.json(result);
+    }
+    else
+        res.json(new Response(null, "User not found", 500));
+}
+
+
+module.exports.findTaskByDueDate = async (req, res) => {
+    let data = req.body;
+    const user = await User.findOne({ 'username': data.username });
+    const result = [];
+    if (user) {
+        for (let task of user.tasks) {
+            let taskDueDate = JSON.stringify(task.duedate)
+            taskDueDate = taskDueDate.slice(1, 11)
+
+            if (taskDueDate > data.due) {
+
+                result.push(task);
+            }
+        }
+        res.json(result);
+    }
+    else
+        res.json(new Response(null, "User n   ot found", 500));
+
+}
+
+
+module.exports.findTaskByPriority = async (req, res) => {
+    let data = req.body;
+
+    const user = await User.findOne({ 'username': data.username });
+    const result = [];
+    if (user) {
+        for (let task of user.tasks) {
+
+
+            if (task.priority === data.priority) {
+
+                result.push(task);
+            }
+        }
+        res.json(result);
+    }
+    else
+        res.json(new Response(null, "User n   ot found", 500));
+
+}
+
+
+

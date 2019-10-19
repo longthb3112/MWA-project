@@ -1,9 +1,9 @@
 const userService = require('../services/userService');
 
-module.exports.login = async(req, res) => {
+module.exports.login = async (req, res) => {
     await userService.login(req, res);
 }
-module.exports.signup = async(req, res) => {
+module.exports.signup = async (req, res) => {
     await userService.signup(req, res);
 }
 
@@ -15,7 +15,23 @@ module.exports.getUserByUsername = async (req, res) => {
     await userService.getUserByUsername(req, res);
 }
 
-module.exports.updateUser = async(req, res) => {
+module.exports.updateUser = async (req, res) => {
     await userService.updateUser(req, res);
 }
+
+module.exports.findTaskByName = async (req, res) => {
+    await userService.findTaskByName(req, res);
+}
+
+
+module.exports.findTaskByDueDate = async (req, res) => {
+    await userService.findTaskByDueDate(req, res);
+}
+module.exports.findTaskByPriority = async (req, res) => {
+    await userService.findTaskByPriority(req, res);
+}
+
+
+
+
 

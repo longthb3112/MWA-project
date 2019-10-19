@@ -7,7 +7,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 const userRouter = require('./routes/userRoute');
 
-
 const baseUrl = '/api';
 
 app.use(express.json());
