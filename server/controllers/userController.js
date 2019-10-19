@@ -32,3 +32,15 @@ module.exports.editTaskById = async (req, res) => {
 module.exports.findAllTasks = async (req, res) => {
     await userService.findAllTasks(req, res);
 }
+
+module.exports.findTaskByName = async (req, res) => {
+    await userService.findTaskByName(req, res);
+}
+
+
+module.exports.findTaskByDueDate = async (req, res) => {
+    await userService.findTaskByDueDate(req, res);
+}
+module.exports.findTaskByPriority = async (req, res) => {
+    await userService.findTaskByPriority(req, res);
+}

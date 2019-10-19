@@ -156,3 +156,63 @@ module.exports.findAllTasks = async (req, res) => {
     }
 
 }
+module.exports.findTaskByName = async (req, res) => {
+    let data = req.body;
+
+    const user = await User.findOne({ 'username': data.username });
+    const result = [];
+    if (user) {
+        for (let task of user.tasks) {
+            if (task.name === data.taskName) {
+                result.push(task);
+            }
+        }
+        res.json(result);
+    }
+    else
+        res.json(new Response(null, "User not found", 500));
+}
+
+
+module.exports.findTaskByDueDate = async (req, res) => {
+    let data = req.body;
+    const user = await User.findOne({ 'username': data.username });
+    const result = [];
+    if (user) {
+        for (let task of user.tasks) {
+            let taskDueDate = JSON.stringify(task.duedate)
+            taskDueDate = taskDueDate.slice(1, 11)
+
+            if (taskDueDate > data.due) {
+
+                result.push(task);
+            }
+        }
+        res.json(result);
+    }
+    else
+        res.json(new Response(null, "User n   ot found", 500));
+
+}
+
+
+module.exports.findTaskByPriority = async (req, res) => {
+    let data = req.body;
+
+    const user = await User.findOne({ 'username': data.username });
+    const result = [];
+    if (user) {
+        for (let task of user.tasks) {
+
+
+            if (task.priority === data.priority) {
+
+                result.push(task);
+            }
+        }
+        res.json(result);
+    }
+    else
+        res.json(new Response(null, "User n   ot found", 500));
+
+}

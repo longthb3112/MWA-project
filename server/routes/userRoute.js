@@ -14,6 +14,11 @@ router.patch('/user/edittask/id', userController.editTaskById);
 router.get('/useralltasks', userController.findAllTasks);
 
 
+router.get('/usertask/findbyname', userController.findTaskByName);
+router.get('/usertask/findbyduedate', userController.findTaskByDueDate);
+router.get('/usertask1/findbypriority', userController.findTaskByPriority);
+
+
 module.exports = router;
 
 
