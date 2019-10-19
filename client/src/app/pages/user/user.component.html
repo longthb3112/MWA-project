@@ -4,21 +4,22 @@
       <div class="image">
         <img src="assets/img/damir-bosnjak.jpg" alt="...">
       </div>
-      <div class="card-body">
-        <div class="author">
-          <a href="#">
-            <img class="avatar border-gray" src="assets/img/mike.jpg" alt="...">
-            <h5 class="title">Chet Faker</h5>
-          </a>
-          <p class="description">
-            @chetfaker
+      <div *ngIf="userInfo">
+        <div class="card-body">
+          <div class="author">
+            <a href="#">
+              <img class="avatar border-gray" src="assets/img/mike.jpg" alt="...">
+              <h5 class="title">{{userInfo.username}} </h5>
+
+            </a>
+            <p class="description">
+              {{userInfo.email}}
+            </p>
+          </div>
+          <p class="description text-center">
+            {{userInfo.description}}
           </p>
         </div>
-        <p class="description text-center">
-          "I like the way you work it
-          <br> No diggity
-          <br> I wanna bag it up"
-        </p>
       </div>
       <div class="card-footer">
         <hr>
@@ -47,30 +48,30 @@
       </div>
     </div>
     <div>
-  
-        <div class="col-md-12">
-          <div class="card ">
-            <div class="card-header ">
-              <h5 class="card-title">Task Report</h5>
-              <p class="card-category">Task Performance</p>
+
+      <div class="col-md-12">
+        <div class="card ">
+          <div class="card-header ">
+            <h5 class="card-title">Task Report</h5>
+            <p class="card-category">Task Performance</p>
+          </div>
+          <div class="card-body ">
+            <canvas id="chartEmail"></canvas>
+          </div>
+          <div class="card-footer ">
+            <div class="legend">
+              <i class="fa fa-circle text-primary"></i> Closed
+              <i class="fa fa-circle text-warning"></i> Opening
+              <i class="fa fa-circle text-danger"></i> Late
             </div>
-            <div class="card-body ">
-              <canvas id="chartEmail"></canvas>
-            </div>
-            <div class="card-footer ">
-              <div class="legend">
-                <i class="fa fa-circle text-primary"></i> Closed
-                <i class="fa fa-circle text-warning"></i> Opening
-                <i class="fa fa-circle text-danger"></i> Late
-              </div>
-              <hr>
-              <div class="stats">
-                <i class="fa fa-calendar"></i> Number of Tasks
-              </div>
+            <hr>
+            <div class="stats">
+              <i class="fa fa-calendar"></i> Number of Tasks
             </div>
           </div>
         </div>
-      
+      </div>
+
     </div>
   </div>
   <div class="col-md-8">
@@ -78,47 +79,55 @@
       <div class="card-header">
         <h5 class="card-title">Edit Profile</h5>
       </div>
-      <div class="card-body">
-        <form>
-          <div class="row">
-            <div class="col-md-6 px-1">
-              <div class="form-group">
-                <label>Username</label>
-                <input type="text" class="form-control" placeholder="Username" value="michael23">
+      <div class="card-body" *ngIf="userInfo">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <div formGroupName="userData">
+            <div class="row">
+              <div class="col-md-6 px-1">
+                <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" class="form-control" placeholder="Username" [value]="userInfo.username"
+                    [attr.disabled]="true" formControlName="username">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control" placeholder="Email" [value]="userInfo.email"
+                    formControlName="email">
+                </div>
               </div>
             </div>
-            <div class="col-md-6 pl-1">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" placeholder="Email">
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" class="form-control" placeholder="Company" [value]="userInfo.firstname"
+                    formControlName="firstname">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control" placeholder="Last Name" [value]="userInfo.lastname"
+                    formControlName="lastname">
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 pr-1">
-              <div class="form-group">
-                <label>First Name</label>
-                <input type="text" class="form-control" placeholder="Company" value="Chet">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>About Me</label>
+                  <textarea class="form-control textarea" formControlName="description"
+                    [value]="userInfo.description"></textarea>
+                </div>
               </div>
             </div>
-            <div class="col-md-6 pl-1">
-              <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" class="form-control" placeholder="Last Name" value="Faker">
+            <div class="row">
+              <div class="update ml-auto mr-auto">
+                <button type="submit" class="btn btn-primary btn-round">Update
+                  Profile</button>
               </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>About Me</label>
-                <textarea class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="update ml-auto mr-auto">
-              <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
             </div>
           </div>
         </form>
@@ -126,4 +135,3 @@
     </div>
   </div>
 </div>
-
