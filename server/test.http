@@ -14,15 +14,77 @@ POST http://localhost:8000/api/signup
 content-type:application/json
 
 {
-    "username":"user4",
-    "firstname":"long2",
-    "lastname":"tran2",
-    "email":"email4@gmail.com",
+    "username":"suresh",
+    "firstname":"suresh",
+    "lastname":"prajapati",
+    "email":"email1@gmail.com",
     "password":"1234",
+    "imageUrl":"profile-pics/profile-pic01.png",
+    "description":"short description about user",
     "tasks":[
         {
-            "name": "task12",
-            "description":"task 2 description"
+            "name": "task2",
+            "description":"task 1 s description",
+            "duedate":"2019-10-29"
         }
     ]
 }
+###
+PUT http://localhost:8000/api/user
+Content-Type:application/json
+
+{
+    "username":"suresh",
+    "email":"newemail@gmail.com",
+    "firstname":"SURESH",
+    "lastname":"PRAJAPATI"
+}
+
+###
+PATCH http://localhost:8000/api/user/addtask
+Content-Type:application/json
+
+{
+    "username":"suresh",
+    "task":
+         {
+            "name": "task5",
+            "description":"task 5 description",
+            "duedate": "2019-11-15",
+            "priority":4
+        }
+}
+
+###
+PATCH http://localhost:8000/api/user/removeTask/id
+Content-Type:application/json
+
+{
+    "username":"suresh",
+   "taskId": "5daa7bbf94a8f61243e9ad2e"
+}
+
+
+###
+PATCH http://localhost:8000/api/user/edittask/id
+Content-Type:application/json
+
+{
+    "username":"suresh",
+   "taskId": "5daa7be294a8f61243e9ad31",
+   "name":"play game",
+   "description":"play game for a while",
+   "priority":1,
+   "duedate":"2019-12-12"
+}
+
+
+
+###
+GET http://localhost:8000/api/useralltasks
+Content-Type:application/json
+
+{
+    "username":"suresh"
+}
+
