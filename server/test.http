@@ -75,3 +75,6 @@ content-type: application/json
     "username": "sunena",
     "priority": 1
 }
+
+###
+GET http://localhost:8000/api/user/sunena
