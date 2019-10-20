@@ -46,14 +46,17 @@ module.exports.getUserByUsername = async (req, res) => {
 }
 
 module.exports.updateUser = async (req, res) => {
-    let data = req.body;
-    let user = await User.findOne({ 'username': data.username });
 
+    let data = req.body;
+    console.log(data);
+    let user = await User.findOne({ 'username': data.username });
     if (user) {
         try {
-            user.email = data.email;
-            user.firstname = data.firstname;
-            user.lastname = data.lastname;
+
+            if (data.email) user.email = data.email;
+            if (data.firstname) user.firstname = data.firstname;
+            if (data.lastname) user.lastname = data.lastname;
+            if (data.description) user.description = data.description;
 
             user.save();
             res.json(new Response(true));
