@@ -5,30 +5,30 @@ const jwt = require('jsonwebtoken')
 
 const applicationConstant = require('../constants/application-constant');
 const taskSchema = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
         unique: true,
         required: true,
         trim: true,
         sparse: true
     },
-    description:{
+    description: {
         type: String,
         required: true,
         trim: true
     },
-    priority:{
-        type:Number,
-        default:1
+    priority: {
+        type: Number,
+        default: 1
     },
-    duedate:{
-        type:Date
+    duedate: {
+        type: Date
     },
-    status:{
-        type:Number,
+    status: {
+        type: Number,
         default: 0
     }
-   
+
 });
 const userSchema = new mongoose.Schema({
     username: {
@@ -70,12 +70,13 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    imageUrl:{
+    imageUrl: {
         type: String,
+        default: 'Avatar.jpg',
         trim: true
     },
-    description:{
-        type:String
+    description: {
+        type: String
     },
     tokens: [{
         token: {
@@ -83,8 +84,8 @@ const userSchema = new mongoose.Schema({
             required: true
         }
     }],
-    tasks:[taskSchema],
-    roles:[]
+    tasks: [taskSchema],
+    roles: []
 });
 
 userSchema.methods.generateAuthToken = async function () {

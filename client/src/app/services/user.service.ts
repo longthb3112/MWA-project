@@ -29,4 +29,11 @@ export class UserService {
     return this.apiService.put(ApplicationConstants.API_PATH.updateuser, data);
   }
 
+  updatePic(data): Observable<any> {
+    return this.apiService.post('http://localhost:8000/api/updatepic', data);
+  }
+
+
+
+
 }
