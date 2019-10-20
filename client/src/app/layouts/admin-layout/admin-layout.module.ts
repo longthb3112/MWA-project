@@ -18,6 +18,7 @@ import { ApiInterceptor } from '../../services/api.interceptor';
 import { AuthService } from '../../services/auth.service';
 import { TruncatePipe} from '../../pipes/trucate.pipe';
 import {TimerComponent} from '../../components/timer/timer.component';
+import {UsersComponent} from '../../pages/users/users.component';
 /* Angular material 8 */
 import { AngularMaterialModule } from '../../modules/angular.material/angular.material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,7 +44,8 @@ import {TaskUpdateDialogComponent} from '../../pages/task/task.update.component'
     DialogContentExampleDialog,
     TaskUpdateDialogComponent,
     TruncatePipe,
-    TimerComponent
+    TimerComponent,
+    UsersComponent
   ],
    providers: [
      ApiInterceptor, 
