@@ -25,7 +25,6 @@ app.disable('etag');
 app.set('strict routing', true);
 app.enable('case sensitive routing');
 
-//unrem later
 //app.use(require('./middlewares/auth'));
 app.use(baseUrl, userRouter);
 app.use('/profilepic', serveIndex('assets/pics'))

@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from "ngx-toastr";
 
@@ -16,6 +16,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './services/api.interceptor';
 import { AuthService } from './services/auth.service';
 
+/* Angular material 8 */
+import { AngularMaterialModule } from '../app/modules/angular.material/angular.material.module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +35,8 @@ import { AuthService } from './services/auth.service';
     ToastrModule.forRoot(),
     FooterModule,
     FixedPluginModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularMaterialModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -39,6 +44,7 @@ import { AuthService } from './services/auth.service';
     multi: true
     }, AuthService],
    // providers:[],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

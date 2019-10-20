@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 
 export class UserComponent implements OnInit {
 
+
   public canvas: any;
   public ctx;
   public chartEmail;
