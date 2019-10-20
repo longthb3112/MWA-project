@@ -46,7 +46,9 @@ module.exports.getUserByUsername = async (req, res) => {
 }
 
 module.exports.updateUser = async (req, res) => {
+
     let data = req.body;
+    console.log(data);
     let user = await User.findOne({ 'username': data.username });
     if (user) {
         try {

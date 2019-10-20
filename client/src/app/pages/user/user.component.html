@@ -8,7 +8,7 @@
         <div class="card-body">
           <div class="author">
             <a href="#">
-              <img class="avatar border-gray" src="assets/img/mike.jpg" alt="...">
+              <img class="avatar border-gray" src="http://localhost:8000/profilepic/{{userInfo.imageUrl}}" alt="...">
               <h5 class="title">{{userInfo.username}} </h5>
 
             </a>
@@ -114,12 +114,15 @@
                 </div>
               </div>
             </div>
+
+
+
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
                   <label>About Me</label>
                   <textarea class="form-control textarea" formControlName="description"
-                    [value]="userInfo.description"></textarea>
+                    [value]="userInfo.description?userInfo.description:''"></textarea>
                 </div>
               </div>
             </div>
@@ -134,4 +137,14 @@
       </div>
     </div>
   </div>
+</div>
+
+
+<div>
+  <form [formGroup]="myPicForm" (ngSubmit)="onSubmitPic()" enctype="multipart/form-data">
+    <input name="picture" type="file" formControlName="picture" multiple (change)="selectImage($event)" />
+    <button type="submit" class="btn btn-primary btn-round">Upload Pic</button>
+
+  </form>
+
 </div>

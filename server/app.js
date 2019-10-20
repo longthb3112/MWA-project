@@ -1,11 +1,14 @@
 const express = require('express');
 require('./db/mongoose')
+const path = require('path')
 
 const https = require('https')
 const app = express();
 const cors = require('cors');
 const helmet = require('helmet');
 const userRouter = require('./routes/userRoute');
+
+const serveIndex = require('serve-index');
 
 const baseUrl = '/api';
 
@@ -25,13 +28,15 @@ app.enable('case sensitive routing');
 //unrem later
 //app.use(require('./middlewares/auth'));
 app.use(baseUrl, userRouter);
+app.use('/profilepic', serveIndex('assets/pics'))
 
+app.use('/profilepic', express.static(path.join(__dirname, 'assets/pics')))
 
 
 // catch all routes that are not api route
-app.all('*', (req, res) => {
-    res.redirect('/');
-});
+// app.all('*', (req, res) => {
+//     res.redirect('/');
+// });
 
 
 

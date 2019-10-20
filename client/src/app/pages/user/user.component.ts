@@ -18,6 +18,8 @@ export class UserComponent implements OnInit {
   public chartEmail;
   public userInfo;
 
+  myPicForm: FormGroup;
+
   myForm: FormGroup;
   error = "";
   success = "";
@@ -38,6 +40,13 @@ export class UserComponent implements OnInit {
       })
     });
 
+    this.myPicForm = formBuilder.group({
+      'foto': ['', [Validators.required]],
+      'picture': ['', [Validators.required]]
+    });
+
+
+
 
   }
   validateUsername(control: FormControl): { [s: string]: boolean } {
@@ -54,6 +63,41 @@ export class UserComponent implements OnInit {
         this.success = "";
       }
     });
+  }
+
+  images;
+
+  selectImage(event) {
+
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.images = file;
+
+    }
+  }
+
+
+  onSubmitPic() {
+    const formData = new FormData();
+    formData.append('profilepic', this.images);
+    formData.append('username', localStorage.getItem('username'));
+
+
+
+    this.userService.updatePic(formData).subscribe(res => {
+      this.userService.getUserdetail().subscribe(data => this.userInfo = data.data);
+      if (res.status == 'OK') {
+
+        this.error = "";
+        this.success = "Account has been updated successfully.";
+      } else {
+        this.error = res.error;
+        this.success = "";
+      }
+    });
+
+
+
   }
 
 
