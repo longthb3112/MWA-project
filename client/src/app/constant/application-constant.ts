@@ -6,6 +6,7 @@ export class ApplicationConstants {
         login: '/api/login',
         signup: '/api/signup',
         getuser: '/api/user',
-        updateuser: '/api/user'
+        updateuser: '/api/user',
+        updatepic: '/api/updatepic'
     }
 }
