@@ -30,10 +30,15 @@ export class UserService {
   }
 
   updatePic(data): Observable<any> {
-    return this.apiService.post('http://localhost:8000/api/updatepic', data);
+    return this.apiService.post(ApplicationConstants.API_PATH.updatepic, data);
   }
 
-
+  deleteTask(data): Observable<any> {
+    return this.apiService.patch(ApplicationConstants.API_PATH.deletetask, data);
+  }
+  editTask(data): Observable<any> {
+    return this.apiService.patch(ApplicationConstants.API_PATH.edittask, data);
+  }
 
 
 }

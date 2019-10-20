@@ -9,4 +9,7 @@ export class AuthService {
         const token = this.getToken();
         return token != undefined ? true : false;
     }
+    public getUserName():string {
+        return localStorage.getItem('username');
+    }
 }

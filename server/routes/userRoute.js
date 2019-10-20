@@ -24,8 +24,8 @@ router.put('/user', userController.updateUser);
 router.get('/users', userController.findAllUsers);
 
 router.patch('/user/addtask', userController.addTask);
-router.patch('/user/removetask/id', userController.removeTaskById);
-router.patch('/user/edittask/id', userController.editTaskById);
+router.patch('/user/removetask', userController.removeTaskById);
+router.patch('/user/edittask', userController.editTaskById);
 router.get('/useralltasks', userController.findAllTasks);
 
 

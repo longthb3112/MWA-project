@@ -76,7 +76,7 @@ module.exports.addTask = async (req, res) => {
 
 
         try {
-
+            console.log(data.task);
             user.tasks.push(data.task);
 
             user.save();
@@ -94,12 +94,12 @@ module.exports.removeTaskById = async (req, res) => {
     let data = req.body;
     let user = await User.findOne({ 'username': data.username });
 
-
+    console.log(data);
     if (user) {
 
-
+        console.log(data.taskId);
         try {
-
+            console.log(data.taskId);
             user.tasks.pull(data.taskId);
 
 
@@ -125,8 +125,10 @@ module.exports.editTaskById = async (req, res) => {
                     "tasks.$.description": req.body.description,
                     "tasks.$.name": req.body.name,
                     "tasks.$.priority": req.body.priority,
-                    "tasks.$.duedate": req.body.duedate
-
+                    "tasks.$.duedate": req.body.duedate,
+                    "tasks.$.startdate": req.body.startdate,
+                    "tasks.$.status": req.body.status,
+                    "tasks.$.percentage": req.body.percentage
                 }
             }
         );

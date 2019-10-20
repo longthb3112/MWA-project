@@ -34,6 +34,9 @@ export class ApiService {
   put(url: string, body: any): Observable<any>{
     return this.httpClient.put(url, body, {headers: this.buildHeader()});
   }
+  patch(url: string, body: any): Observable<any>{
+    return this.httpClient.patch(url, body, {headers: this.buildHeader()});
+  }
 
   buildHeader() {
     let myHeaders = new HttpHeaders();

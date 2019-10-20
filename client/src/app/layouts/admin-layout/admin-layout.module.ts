@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
 import { UserComponent }            from '../../pages/user/user.component';
-import { TaskComponent,DialogContentExampleDialog }           from '../../pages/task/task.component';
+import { TaskComponent,DialogContentExampleDialog }   from '../../pages/task/task.component';
 import { TypographyComponent }      from '../../pages/typography/typography.component';
 import { NotificationsComponent }   from '../../pages/notifications/notifications.component';
 
@@ -16,9 +16,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiInterceptor } from '../../services/api.interceptor';
 import { AuthService } from '../../services/auth.service';
+import { TruncatePipe} from '../../pipes/trucate.pipe';
+import {TimerComponent} from '../../components/timer/timer.component';
 /* Angular material 8 */
 import { AngularMaterialModule } from '../../modules/angular.material/angular.material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {TaskUpdateDialogComponent} from '../../pages/task/task.update.component';
 
 @NgModule({
   imports: [
@@ -37,13 +40,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NotificationsComponent,
     LoginComponent,
     SignupComponent,
-    DialogContentExampleDialog
+    DialogContentExampleDialog,
+    TaskUpdateDialogComponent,
+    TruncatePipe,
+    TimerComponent
   ],
    providers: [
      ApiInterceptor, 
      AuthService],
    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-   entryComponents: [DialogContentExampleDialog],
+   entryComponents: [DialogContentExampleDialog,TaskUpdateDialogComponent],
 })
 
 export class AdminLayoutModule {}

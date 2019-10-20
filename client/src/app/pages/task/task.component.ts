@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
+import {AuthService} from '../../services/auth.service';
+import {TaskUpdateDialogComponent} from './task.update.component';
 declare interface TaskData {
     headerRow: string[];
     dataRows: string[][];
@@ -14,52 +16,85 @@ declare interface TaskData {
 })
 
 export class TaskComponent implements OnInit{
-    constructor(private userService:UserService,public dialog: MatDialog){
+    constructor(private userService:UserService,public dialog: MatDialog,private authService:AuthService){
 
     }
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','actions'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['name', 'description', 'startdate', 'duedate','status','priority','percentage','timer','actions'];
+  dataSource = null;
 
-    public tableData1: TaskData;
-    public tableData2: TaskData;
-    user = {
-        username: '',
-        email: '',
-        firstname: '',
-        lastname: ''
-      };
-    ngOnInit(){
-       
+    ngOnInit(){ 
+      this.getUserDetail();
     }
-    openDialog(row) {
+    getUserDetail(){
+      this.userService.getUserdetail().subscribe(result =>{
+        this.dataSource = result.data.tasks.map(function(task){
+             return {...task}
+       })
+      });
+    }
+    deleteTask(row) {
         const dialogRef = this.dialog.open(DialogContentExampleDialog);
     
         dialogRef.afterClosed().subscribe(result => {
-          console.log(`Dialog result: ${result}`);
+          if(result == true){
+            this.userService.deleteTask({username:this.authService.getUserName(),taskId:row._id}).subscribe(result =>{
+              if(result){
+                this.getUserDetail();
+              }
+            });
+          }
         });
       }
-}
-export interface PeriodicElement {
-    name: string;
-    position: number;
-    weight: number;
-    symbol: string;
+      updateTask(row) {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        console.log(row.startdate);
+        console.log(row.duedate);
+        dialogConfig.data = row;
+        dialogConfig.height = "600px";
+        dialogConfig.width = "600px";
+        const dialogRef = this.dialog.open(TaskUpdateDialogComponent,dialogConfig);
+        dialogRef.afterClosed().subscribe(value => {         
+          // console.log({username:this.authService.getUserName(),taskId:row._id,
+          //   name:value.taskData.name,
+          //   description:value.taskData.description,
+          //   percentage:value.taskData.percentage,
+          //   priority:value.taskData.priority,
+          //   status:value.taskData.status,
+          //   startdate:new Date(value.taskData.startdate.year,value.taskData.startdate.month - 1,value.taskData.startdate.day,0,0,0,0),
+          //   duedate:new Date(value.taskData.duedate.year,value.taskData.duedate.month - 1,value.taskData.duedate.day,0,0,0,0)});
+
+            this.userService.editTask({username:this.authService.getUserName(),taskId:row._id,
+              name:value.taskData.name,
+              description:value.taskData.description,
+              percentage:value.taskData.percentage,
+              priority:value.taskData.priority,
+              status:value.taskData.status,
+              startdate:new Date(value.taskData.startdate.year,value.taskData.startdate.month - 1 == 0 ? 1: value.taskData.startdate.month - 1,value.taskData.startdate.day,0,0,0,0),
+              duedate:new Date(value.taskData.duedate.year,value.taskData.duedate.month - 1 == 0 ? 1:value.taskData.duedate.month - 1,value.taskData.duedate.day,0,0,0,0)})
+              .subscribe(result =>{
+              if(result){
+                this.getUserDetail();
+              }
+            })
+       
+      });
   }
+}
   
-  const ELEMENT_DATA: PeriodicElement[] = [
-    { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-    { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-    { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-    { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-    { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-    { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-    { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-    { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-    { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-    { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-  ];
   @Component({
     selector: 'dialog-content-example-dialog',
-    template: 'test',
+    template: `<mat-dialog-content>Are you sure?</mat-dialog-content>
+
+    <mat-dialog-actions>
+    <button mat-button mat-dialog-close>No</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button [mat-dialog-close]="true">Yes</button>
+    </mat-dialog-actions>`
   })
   export class DialogContentExampleDialog {}
+
+  
+

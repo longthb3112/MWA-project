@@ -21,12 +21,21 @@ const taskSchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
+    startdate:{
+        type:Date,
+        required: true
+    },
     duedate: {
-        type: Date
+        type: Date,
+        required:true
     },
     status: {
         type: Number,
         default: 0
+    },
+    percentage:{
+        type:Number,
+        default:0
     }
 
 });
