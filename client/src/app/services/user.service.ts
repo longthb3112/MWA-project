@@ -20,6 +20,10 @@ export class UserService {
     return this.apiService.post(ApplicationConstants.API_PATH.signup, body);
   }
 
+  getAllUsers(body): Observable<any> {
+    return this.apiService.get(ApplicationConstants.API_PATH.findAllUsers, body);
+  }
+
   getUserdetail(): Observable<any> {
     let username = localStorage.getItem('username');
     return this.apiService.get(ApplicationConstants.API_PATH.getuser + '/' + username, new HttpParams());
@@ -38,6 +42,13 @@ export class UserService {
   }
   editTask(data): Observable<any> {
     return this.apiService.patch(ApplicationConstants.API_PATH.edittask, data);
+  }
+  updateAccountStatus(data): Observable<any> {
+    return this.apiService.patch(ApplicationConstants.API_PATH.statuschange, data);
+  }
+  searchByName(data): Observable<any> {
+
+    return this.apiService.post(ApplicationConstants.API_PATH.searchbyname, data);
   }
 
 

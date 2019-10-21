@@ -4,6 +4,7 @@ import { UserService } from 'app/services/user.service';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'user-cmp',
   moduleId: module.id,
@@ -31,7 +32,7 @@ export class UserComponent implements OnInit {
 
 
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private router: Router, private toastr: ToastrService) {
     this.myForm = formBuilder.group({
       'userData': formBuilder.group({
         'username': [localStorage.getItem('username'), [Validators.required, this.validateUsername]],
@@ -63,6 +64,7 @@ export class UserComponent implements OnInit {
         this.userService.getUserdetail().subscribe(data => this.userInfo = data.data);
         this.error = "";
         this.success = "Account has been updated successfully.";
+        this.showNotification('top', 'right');
       } else {
         this.error = res.error;
         this.success = "";
@@ -77,9 +79,26 @@ export class UserComponent implements OnInit {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.images = file;
+      this.onSubmitPic();
 
     }
   }
+
+  showNotification(from, align) {
+
+    this.toastr.success(
+      '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message"><br />Profile has been Updated Successfully!!!<br/><br/></span>',
+      "",
+      {
+        timeOut: 4000,
+        closeButton: true,
+        enableHtml: true,
+        toastClass: "alert alert-success alert-with-icon",
+        positionClass: "toast-" + from + "-" + align
+      }
+    );
+  }
+
 
 
   onSubmitPic() {
