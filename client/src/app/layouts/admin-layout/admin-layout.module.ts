@@ -23,7 +23,9 @@ import {UsersComponent} from '../../pages/users/users.component';
 import { AngularMaterialModule } from '../../modules/angular.material/angular.material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {TaskUpdateDialogComponent} from '../../pages/task/task.update.component';
+import {TaskInsertDialogComponent} from '../../pages/task/task.insert.component';
 
+import {StatusPipe} from '../../pipes/status.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -45,13 +47,15 @@ import {TaskUpdateDialogComponent} from '../../pages/task/task.update.component'
     TaskUpdateDialogComponent,
     TruncatePipe,
     TimerComponent,
-    UsersComponent
+    UsersComponent,
+    StatusPipe,
+    TaskInsertDialogComponent
   ],
    providers: [
      ApiInterceptor, 
      AuthService],
    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-   entryComponents: [DialogContentExampleDialog,TaskUpdateDialogComponent],
+   entryComponents: [DialogContentExampleDialog,TaskUpdateDialogComponent,TaskInsertDialogComponent],
 })
 
 export class AdminLayoutModule {}

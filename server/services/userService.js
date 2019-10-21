@@ -49,7 +49,7 @@ module.exports.getUserByUsername = async (req, res) => {
 module.exports.updateUser = async (req, res) => {
 
     let data = req.body;
-    console.log(data);
+
     let user = await User.findOne({ 'username': data.username });
     if (user) {
         try {
@@ -71,15 +71,12 @@ module.exports.updateUser = async (req, res) => {
 
 module.exports.addTask = async (req, res) => {
     let data = req.body;
+   
     let user = await User.findOne({ 'username': data.username });
 
     if (user) {
-
-
         try {
-            console.log(data.task);
             user.tasks.push(data.task);
-
             user.save();
             res.json(new Response(true));
         } catch (e) {
@@ -144,13 +141,11 @@ module.exports.editTaskById = async (req, res) => {
 
 
 module.exports.findAllTasks = async (req, res) => {
-    let data = req.body;
-    let user = await User.findOne({ 'username': data.username });
-    if (user) {
-
-
+    let data = req.query;
+    let tasks = await User.findOne({ 'username': data.username }).select('tasks').sort('-percentage');
+    if (tasks) {
         try {
-            res.json(user.tasks);
+            res.json(tasks);
         } catch (e) {
             res.json(new Response(null, 'Cannot update user', 500));
         }
@@ -160,13 +155,12 @@ module.exports.findAllTasks = async (req, res) => {
 
 }
 module.exports.findTaskByName = async (req, res) => {
-    let data = req.body;
-
+    let data = req.query;
     const user = await User.findOne({ 'username': data.username });
     const result = [];
     if (user) {
         for (let task of user.tasks) {
-            if (task.name === data.taskName) {
+            if (String(task.name).toLowerCase().indexOf(data.taskName.toLowerCase()) > -1) {
                 result.push(task);
             }
         }
@@ -180,6 +174,7 @@ module.exports.findTaskByName = async (req, res) => {
 module.exports.findTaskByDueDate = async (req, res) => {
     let data = req.body;
     const user = await User.findOne({ 'username': data.username });
+
     const result = [];
     if (user) {
         for (let task of user.tasks) {

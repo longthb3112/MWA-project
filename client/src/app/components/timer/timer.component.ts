@@ -27,23 +27,26 @@ ngOnInit(){
     }
 }
   startTimer() {
+    this.calculateTime();
     this.interval = setInterval(() => {
-        var remainTime = new Date(this.endate).valueOf() - Date.now().valueOf();
-        if(remainTime> 0){
-            this.isLate = false;
-            var now = moment();
-            var hours = 23 -now.hour();
-            var minutes = 60 - now.minute();
-            var seconds = 60 - now.second();
-            this.time = hours+ ":"+ minutes+":"+ (seconds == 60 ? 0: seconds);
-        }else{
-            this.isLate = true;
-            this.time = moment(this.endate).fromNow();
-            this.clearTimer();
-        }    
+      this.calculateTime();
     },1000)
   }
-
+  calculateTime(){
+    var remainTime = new Date(this.endate).valueOf() - Date.now().valueOf();
+    if(remainTime> 0){
+        this.isLate = false;
+        var now = moment();
+        var hours = 23 -now.hour();
+        var minutes = 60 - now.minute();
+        var seconds = 60 - now.second();
+        this.time = hours+ ":"+ minutes+":"+ (seconds == 60 ? 0: seconds);
+    }else{
+        this.isLate = true;
+        this.time = moment(this.endate).fromNow();
+        this.clearTimer();
+    }    
+  }
   clearTimer() {
     clearInterval(this.interval);
   }

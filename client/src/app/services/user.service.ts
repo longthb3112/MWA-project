@@ -43,6 +43,15 @@ export class UserService {
   editTask(data): Observable<any> {
     return this.apiService.patch(ApplicationConstants.API_PATH.edittask, data);
   }
+  searchTask(data): Observable<any> {
+    return this.apiService.get(ApplicationConstants.API_PATH.searchtask, data);
+  }
+  findAllTask(data): Observable<any> {
+    return this.apiService.get(ApplicationConstants.API_PATH.findalltask, data);
+  }
+  addTask(data): Observable<any> {
+    return this.apiService.patch(ApplicationConstants.API_PATH.addtask, data);
+  }
   updateAccountStatus(data): Observable<any> {
     return this.apiService.patch(ApplicationConstants.API_PATH.statuschange, data);
   }

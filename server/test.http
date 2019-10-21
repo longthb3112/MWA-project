@@ -35,10 +35,10 @@ PUT http://localhost:8000/api/user
 Content-Type:application/json
 
 {
-    "username":"suresh",
-    "email":"newemail@gmail.com",
-    "firstname":"SURESH",
-    "lastname":"PRAJAPATI"
+    "username":"long",
+    "email":"long1@gmail.com",
+    "firstname":"Long",
+    "lastname":"Tran"
 }
 
 ###
@@ -49,12 +49,12 @@ Content-Type:application/json
     "username":"long2",
     "task":
          {
-            "name": "task6",
-            "description":"task 6 description",
-            "startdate":"2019-10-21",
-            "duedate": "2019-10-21",
-            "priority":4,
-            "percentage":60.00
+            "name": "task 3",
+            "description":"task 3 description",
+            "startdate":"2019-10-24",
+            "duedate": "2019-10-25",
+            "priority":2,
+            "percentage":30.00
         }
 }
 
@@ -83,21 +83,12 @@ Content-Type:application/json
 }
 
 ###
-GET http://localhost:8000/api/useralltasks
-Content-Type:application/json
+GET http://localhost:8000/api/useralltasks?username=long2
 
-{
-    "username":"suresh"
-}
 
 ###
-GET http://localhost:8000/api/usertask/findbyname
-content-type: application/json
+GET http://localhost:8000/api/usertask/findbyname?username=long2&taskName=task
 
-{
-    "username": "suresh",
-    "taskName": "task2"
-}
 
 ###
 GET http://localhost:8000/api/usertask/findbyduedate

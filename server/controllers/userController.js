@@ -34,7 +34,7 @@ module.exports.findAllTasks = async (req, res) => {
 }
 
 module.exports.findTaskByName = async (req, res) => {
-    await userService.findTaskByName(req, res);
+     await userService.findTaskByName(req, res);
 }
 
 
