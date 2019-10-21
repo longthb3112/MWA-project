@@ -43,7 +43,6 @@ export class UsersComponent implements OnInit {
   }
 
   toggleAccountStatus(e, id, status) {
-    // console.log(e.target.value)
     this.userService.updateAccountStatus({ id: id, status: status }).subscribe();
   }
 
@@ -63,64 +62,6 @@ export class UsersComponent implements OnInit {
     });
   }
 
-
-
-
-
-  /*
-  deleteTask(row) {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result == true) {
-        this.userService.deleteTask({ username: this.authService.getUserName(), taskId: row._id }).subscribe(result => {
-          if (result) {
-            this.getUserDetail();
-          }
-        });
-      }
-    });
-  }
-  
-    updateTask(row) {
-      const dialogConfig = new MatDialogConfig();
-  
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      console.log(row.startdate);
-      console.log(row.duedate);
-      dialogConfig.data = row;
-      dialogConfig.height = "600px";
-      dialogConfig.width = "600px";
-      const dialogRef = this.dialog.open(TaskUpdateDialogComponent, dialogConfig);
-      dialogRef.afterClosed().subscribe(value => {
-        // console.log({username:this.authService.getUserName(),taskId:row._id,
-        //   name:value.taskData.name,
-        //   description:value.taskData.description,
-        //   percentage:value.taskData.percentage,
-        //   priority:value.taskData.priority,
-        //   status:value.taskData.status,
-        //   startdate:new Date(value.taskData.startdate.year,value.taskData.startdate.month - 1,value.taskData.startdate.day,0,0,0,0),
-        //   duedate:new Date(value.taskData.duedate.year,value.taskData.duedate.month - 1,value.taskData.duedate.day,0,0,0,0)});
-  
-        this.userService.editTask({
-          username: this.authService.getUserName(), taskId: row._id,
-          name: value.taskData.name,
-          description: value.taskData.description,
-          percentage: value.taskData.percentage,
-          priority: value.taskData.priority,
-          status: value.taskData.status,
-          startdate: new Date(value.taskData.startdate.year, value.taskData.startdate.month - 1 == 0 ? 1 : value.taskData.startdate.month - 1, value.taskData.startdate.day, 0, 0, 0, 0),
-          duedate: new Date(value.taskData.duedate.year, value.taskData.duedate.month - 1 == 0 ? 1 : value.taskData.duedate.month - 1, value.taskData.duedate.day, 0, 0, 0, 0)
-        })
-          .subscribe(result => {
-            if (result) {
-              this.getUserDetail();
-            }
-          })
-  
-      });
-    }*/
 }
 
 
