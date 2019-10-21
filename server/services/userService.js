@@ -20,10 +20,10 @@ module.exports.login = async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.username, req.body.password)
         let tokens = await user.generateAuthToken();
-        let data = { token: tokens, name: (user.lastname + ' ' + user.firstname), username: user.username };
+        let data = { token: tokens, name: (user.lastname + ' ' + user.firstname), username: user.username, role: user.role };
         res.json(new Response(data));
     } catch (e) {
-        res.json(new Response(null, "Username or password mismatch", 403));
+        res.json(new Response(null, e.message, 403));
     }
 }
 
