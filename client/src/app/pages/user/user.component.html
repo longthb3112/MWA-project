@@ -6,30 +6,22 @@
       </div>
       <div *ngIf="userInfo">
         <div>
-          <div style="position:relative;top:25px;left:50px;">
+
+          <div class="author">
+
             <form [formGroup]="myPicForm" enctype="multipart/form-data">
-
-
-              <label style="cursor: pointer;" for="upload-photo"><img height="30" width="30"
-                  src="assets/img/uploadicon.jpg" alt="..." /></label>
+              <label style="cursor: pointer;" for="upload-photo"><img class="avatar border-gray"
+                  src="http://localhost:8000/profilepic/{{userInfo.imageUrl}}" alt="..."></label>
               <input accept="image/*" type="file" name="picture" id="upload-photo"
                 style="opacity: 0; position: absolute; z-index: -1;" type="file" formControlName="picture" multiple
                 (change)="selectImage($event)" />
-
-
-
-
-
             </form>
 
-          </div>
-          <div class="author">
 
-            <a href="#">
-              <img class="avatar border-gray" src="http://localhost:8000/profilepic/{{userInfo.imageUrl}}" alt="...">
-              <h5 class="title">{{userInfo.firstname}} {{userInfo.lastname}} </h5>
 
-            </a>
+            <h5 class="title">{{userInfo.firstname}} {{userInfo.lastname}} </h5>
+
+
 
           </div>
 
