@@ -57,8 +57,11 @@
                             <td mat-cell *matCellDef="let row">
                                 <!-- <button mat-button (click)="deleteTask(row)">Delete</button>
                             <button mat-button (click)="updateTask(row)">Update</button> -->
+
+
+
                                 <label class="switch">
-                                    <input type="checkbox" [checked]="row.accountStatus"
+                                    <input [disabled]="row.role==='admin'" type="checkbox" [checked]="row.accountStatus"
                                         (change)="toggleAccountStatus($event,row._id,row.accountStatus)" [value]="row">
                                     <span class="slider round"></span>
                                 </label>

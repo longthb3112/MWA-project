@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
 @Component({
   selector: 'user-cmp',
   moduleId: module.id,
@@ -134,8 +135,9 @@ export class UserComponent implements OnInit {
 
 
       for (let task of data.data.tasks) {
+        let days = moment(task.duedate).diff(moment(Date.now()), 'days');
         if (task.status === 1) this.closed++;
-        else if (task.status === 0) this.opening++;
+        else if (task.status === 0 && days > 0) this.opening++;
         else this.late++;
       }
       this.total = data.data.tasks.length;
