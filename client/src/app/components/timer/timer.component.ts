@@ -11,10 +11,12 @@ export class TimerComponent implements OnInit {
   isLate = false;
   time:string;
   interval;
+  
 @Input("startdate") startDate:Date ;
 @Input("enddate") endate:Date ;
+@Input("status") status:Number;
 ngOnInit(){
-    
+   if(this.status == 0){
     var days = moment(this.endate).diff(moment(Date.now()),'days');
     if(days == 0){
         this.startTimer();
@@ -25,6 +27,8 @@ ngOnInit(){
         this.isLate = true;
         this.time = moment(this.endate).fromNow();
     }
+   } 
+    
 }
   startTimer() {
     this.calculateTime();

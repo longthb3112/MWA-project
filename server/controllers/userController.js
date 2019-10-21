@@ -44,3 +44,11 @@ module.exports.findTaskByDueDate = async (req, res) => {
 module.exports.findTaskByPriority = async (req, res) => {
     await userService.findTaskByPriority(req, res);
 }
+module.exports.sendemailreminder = async (req, res) => {
+    await userService.findUserWithOverduedateTask(req,res).then(function(result){
+        
+    });
+}
+    
+
+    

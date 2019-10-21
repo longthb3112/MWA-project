@@ -14,16 +14,16 @@ POST http://localhost:8000/api/signup
 content-type:application/json
 
 {
-    "username":"long2",
+    "username":"longuser",
     "firstname":"Long",
     "lastname":"Tran",
-    "email":"email5@gmail.com",
+    "email":"email4@gmail.com",
     "password":"123",
     "imageUrl":"profile-pics/profile-pic01.png",
     "description":"short description about user",
     "tasks":[
         {
-            "name": "task2",
+            "name": "task44",
             "description":"task 1 s description",
             "startdate":"2019-10-27",
             "duedate":"2019-10-29"         
@@ -110,3 +110,6 @@ content-type: application/json
 
 ###
 GET http://localhost:8000/api/user/sunena
+
+###
+GET http://localhost:8000/api/sendemailreminder

@@ -110,6 +110,7 @@ export class TaskInsertDialogComponent implements OnInit {
   }
 
   save() {
+    
     this.dialogRef.close(this.form.value);
   }
 

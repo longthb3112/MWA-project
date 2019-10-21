@@ -27,6 +27,7 @@ router.patch('/user/addtask', userController.addTask);
 router.patch('/user/removetask', userController.removeTaskById);
 router.patch('/user/edittask', userController.editTaskById);
 router.get('/useralltasks', userController.findAllTasks);
+router.get('/sendemailreminder', userController.sendemailreminder);
 
 
 router.get('/usertask/findbyname', userController.findTaskByName);
@@ -80,12 +81,7 @@ router.post('/updatepic',
 
         res.json({})
     }
-
-
-
-
 )
-
 
 module.exports = router;
 

@@ -56,7 +56,6 @@ export class UserService {
     return this.apiService.patch(ApplicationConstants.API_PATH.statuschange, data);
   }
   searchByName(data): Observable<any> {
-
     return this.apiService.post(ApplicationConstants.API_PATH.searchbyname, data);
   }
 

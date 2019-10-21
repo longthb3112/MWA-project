@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Response = require('../dto/response');
-
+const moment = require('moment');
+const nodemailer = require('nodemailer');
 module.exports.addNewUser = async () => {
     const user = new User({
         firstName: 'Long',
@@ -92,10 +93,8 @@ module.exports.removeTaskById = async (req, res) => {
     let data = req.body;
     let user = await User.findOne({ 'username': data.username });
 
-    console.log(data);
     if (user) {
 
-        console.log(data.taskId);
         try {
             console.log(data.taskId);
             user.tasks.pull(data.taskId);
@@ -134,8 +133,6 @@ module.exports.editTaskById = async (req, res) => {
     } catch (e) {
         res.json(new Response(null, 'Cannot update user', 500));
     }
-
-
 }
 
 
@@ -207,6 +204,106 @@ module.exports.findTaskByPriority = async (req, res) => {
 
                 result.push(task);
             }
+        }
+        res.json(result);
+    }
+    else
+        res.json(new Response(null, "User not found", 500));
+
+}
+module.exports.findUserWithOverduedateTask = async (req, res) => {
+    let data = req.body;
+    var currentDate = moment().toDate();
+   
+    const users = await User.find({"role":"client","accountStatus":true})
+                            .where("tasks.status").equals(0)
+                            .where("tasks.duedate").lt(currentDate);
+    const result = [];
+    if (users) {
+        for (let user of users){
+            var item = {email:user.email, tasks:[]};
+            for(let task of user.tasks){
+                if(task.status == 0 && task.duedate <= currentDate){
+                    item.tasks.push({name:task.name,
+                                    description:task.description,
+                                    startdate:moment(task.startdate).format('MM/DD/YYYY'),
+                                    enddate:moment(task.duedate).format('MM/DD/YYYY'),
+                                    percentage:task.percentage});
+                }
+            }
+            result.push(item);
+        }
+        var transporter = nodemailer.createTransport({
+            pool:true,
+            host: "mail.cuidot.vn",
+            port: 465,
+            secure: true, // use TLS
+            auth: {
+              user: "longtran@cuidot.vn",
+              pass: "Mwa@123"
+            }
+          });
+    
+        for(var content of result){
+           
+           var body ="";
+            for(var taskData of content.tasks){
+                body+=`<tr>
+               <td>
+               ${taskData.name} 
+               </td>
+               <th>
+                ${taskData.description}
+               </td>
+               <td style="color:red">
+               ${taskData.startdate}
+               </td>
+               <td style="color:red">
+               ${taskData.enddate}
+               </td>
+               <td>
+               ${taskData.percentage} %
+               </td>
+              </tr>`;
+          
+            }  
+        
+            var emailContent = `
+            <h1>TASKS OVER DUEDATE</h1><br><br>
+            <table border="1" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+             <th>
+              Name
+             </th>
+             <th>
+              Description
+             </th>
+             <th>
+              Start Date
+             </th>
+             <th>
+              End Date
+             </th>
+             <th>
+             Percentage
+             </th>
+            </tr>${body}
+           </table>`;
+         
+            var mailOptions = {
+              from: 'longtran@cuidot.vn',
+              to: content.email,
+              subject: 'Tasks reminder with PTM',
+              html: emailContent
+            };
+            
+            transporter.sendMail(mailOptions, function(error, info){
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent: ' + info.response);  
+             }
+            });
         }
         res.json(result);
     }

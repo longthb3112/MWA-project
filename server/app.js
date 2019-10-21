@@ -1,4 +1,5 @@
 const express = require('express');
+
 require('./db/mongoose')
 const path = require('path')
 
@@ -36,7 +37,6 @@ app.use('/profilepic', express.static(path.join(__dirname, 'assets/pics')))
 // app.all('*', (req, res) => {
 //     res.redirect('/');
 // });
-
 
 
 app.listen(8000, () => console.log('Server listening on port 8000'))
