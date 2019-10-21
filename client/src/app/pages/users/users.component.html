@@ -24,9 +24,7 @@
                     <span *ngIf="!dataSource.length"
                         style="color:rgb(255, 0, 0); width:50%; display:block; position: relative; margin:0 auto; font-size: 3em;">
                         NO
-                        DATA
-                        TO
-                        DISPLAY</span>
+                        RESULTS FOUND</span>
                 </div>
                 <div *ngIf="dataSource.length" class="card-body">
                     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -55,7 +53,7 @@
                         </ng-container>
 
                         <ng-container matColumnDef="actions">
-                            <th mat-header-cell *matHeaderCellDef>Action </th>
+                            <th mat-header-cell *matHeaderCellDef>Status </th>
                             <td mat-cell *matCellDef="let row">
                                 <!-- <button mat-button (click)="deleteTask(row)">Delete</button>
                             <button mat-button (click)="updateTask(row)">Update</button> -->
