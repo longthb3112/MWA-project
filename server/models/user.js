@@ -98,7 +98,10 @@ const userSchema = new mongoose.Schema({
         }
     }],
     tasks: [taskSchema],
-    roles: []
+    role: {
+        type: String,
+        default: 'client'
+    }
 });
 
 userSchema.methods.generateAuthToken = async function () {
@@ -122,8 +125,10 @@ userSchema.statics.findByCredentials = async (uname, upassword) => {
     if (!isMatch) {
         throw new Error('Unable to login')
     }
-
-    return user;
+    if (user.accountStatus === true)
+        return user;
+    else
+        throw new Error('Account is Blocked!!!')
 }
 
 userSchema.pre('save', async function (next) {
