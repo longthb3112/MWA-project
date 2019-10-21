@@ -46,6 +46,7 @@ export class UserComponent implements OnInit {
       })
     });
 
+
     this.myPicForm = formBuilder.group({
       'foto': ['', [Validators.required]],
       'picture': ['', [Validators.required]]
