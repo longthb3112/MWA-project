@@ -55,6 +55,9 @@ export class UserService {
   updateAccountStatus(data): Observable<any> {
     return this.apiService.patch(ApplicationConstants.API_PATH.statuschange, data);
   }
+  updateNotificationSetting(data): Observable<any> {
+    return this.apiService.patch(ApplicationConstants.API_PATH.settingchange, data);
+  }
   searchByName(data): Observable<any> {
 
     return this.apiService.post(ApplicationConstants.API_PATH.searchbyname, data);

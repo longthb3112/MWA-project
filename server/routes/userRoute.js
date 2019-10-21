@@ -40,12 +40,15 @@ router.post('/searchbyname', async (req, res) => {
 
 router.patch('/statuschange', async (req, res) => {
 
-    // console.log(req.body.id + " " + req.body.status)
-
     await User.updateOne({ _id: req.body.id }, { $set: { accountStatus: !req.body.status } });
     res.json({})
 
 });
+
+router.patch('/settingchange', async (req, res) => {
+    await User.updateOne({ username: req.body.uname }, { $set: { notification: !req.body.notification } });
+    res.json({})
+})
 
 
 router.post('/updatepic',
