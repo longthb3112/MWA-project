@@ -71,7 +71,7 @@ module.exports.updateUser = async (req, res) => {
 
 module.exports.addTask = async (req, res) => {
     let data = req.body;
-   
+
     let user = await User.findOne({ 'username': data.username });
 
     if (user) {
