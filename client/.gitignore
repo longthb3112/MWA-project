@@ -9,6 +9,7 @@
 
 # dependencies
 /node_modules
+/_MACOSX
 
 # profiling files
 chrome-profiler-events*.json
