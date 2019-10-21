@@ -33,6 +33,20 @@ router.get('/usertask/findbyname', userController.findTaskByName);
 router.get('/usertask/findbyduedate', userController.findTaskByDueDate);
 router.get('/usertask1/findbypriority', userController.findTaskByPriority);
 
+router.post('/searchbyname', async (req, res) => {
+    const results = await User.find({ username: { $regex: req.body.name } });
+    res.json(results)
+})
+
+router.patch('/statuschange', async (req, res) => {
+
+    // console.log(req.body.id + " " + req.body.status)
+
+    await User.updateOne({ _id: req.body.id }, { $set: { accountStatus: !req.body.status } });
+    res.json({})
+
+});
+
 
 router.post('/updatepic',
 

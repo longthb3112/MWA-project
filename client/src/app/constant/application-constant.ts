@@ -7,8 +7,11 @@ export class ApplicationConstants {
         signup: '/api/signup',
         getuser: '/api/user',
         updateuser: '/api/user',
-        updatepic:'/api/updatepic',
-        deletetask:'/api/user/removetask/',
-        edittask:'/api/user/edittask'
+        updatepic: '/api/updatepic',
+        deletetask: '/api/user/removetask/',
+        edittask: '/api/user/edittask',
+        findAllUsers: '/api/users',
+        statuschange: '/api/statuschange',
+        searchbyname: '/api/searchbyname'
     }
 }

@@ -12,6 +12,7 @@ module.exports.addNewUser = async () => {
 
 module.exports.findAllUsers = async (req, res) => {
     const users = await User.find({});
+
     res.json(users);
 }
 

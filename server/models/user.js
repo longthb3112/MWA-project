@@ -21,21 +21,21 @@ const taskSchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
-    startdate:{
-        type:Date,
+    startdate: {
+        type: Date,
         required: true
     },
     duedate: {
         type: Date,
-        required:true
+        required: true
     },
     status: {
         type: Number,
         default: 0
     },
-    percentage:{
-        type:Number,
-        default:0
+    percentage: {
+        type: Number,
+        default: 0
     }
 
 });
@@ -78,6 +78,10 @@ const userSchema = new mongoose.Schema({
                 throw new Error('Password cannot contain "password"')
             }
         }
+    },
+    accountStatus: {
+        type: Boolean,
+        default: true
     },
     imageUrl: {
         type: String,

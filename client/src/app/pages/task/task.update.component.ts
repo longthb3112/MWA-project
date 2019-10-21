@@ -79,8 +79,8 @@ export class TaskUpdateDialogComponent implements OnInit {
   private duedate: Date;
   private status: Number;
   private percentage: Number;
-  private priority:Number;
-  
+  private priority: Number;
+
   constructor(
 
     private dialogRef: MatDialogRef<TaskUpdateDialogComponent>,
@@ -88,13 +88,13 @@ export class TaskUpdateDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data) {
     this.name = data.name;
     this.description = data.description;
-    this.startdate = new Date(data.startdate) ;
-   
+    this.startdate = new Date(data.startdate);
+
     this.duedate = new Date(data.duedate);
- 
+
     this.percentage = data.percentage;
     this.priority = data.priority;
-    this.status = data.status;  
+    this.status = data.status;
   }
 
   ngOnInit() {
@@ -103,8 +103,8 @@ export class TaskUpdateDialogComponent implements OnInit {
       'taskData': this.formBuilder.group({
         'name': [this.name,],
         'description': [this.description,],
-        'startdate': [{day:this.startdate.getDate(),month:this.startdate.getMonth() + 1,year:this.startdate.getFullYear()},],        
-        'duedate': [{day:this.duedate.getDate(),month:this.duedate.getMonth() + 1,year:this.duedate.getFullYear()},],        
+        'startdate': [{ day: this.startdate.getDate(), month: this.startdate.getMonth() + 1, year: this.startdate.getFullYear() },],
+        'duedate': [{ day: this.duedate.getDate(), month: this.duedate.getMonth() + 1, year: this.duedate.getFullYear() },],
         'status': [this.status,],
         'percentage': [this.percentage,],
         'priority': [this.priority,]

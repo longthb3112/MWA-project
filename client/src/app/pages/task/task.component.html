@@ -2,21 +2,21 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-      
-            <h4 class="card-title" style="float:left"> Task List</h4>
-       
-          <form style="float:right">
-            <div class="input-group no-border">
-              <input type="text" value="" class="form-control" placeholder="Search...">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <i class="nc-icon nc-zoom-split"></i>
-                </div>
+
+        <h4 class="card-title" style="float:left"> Task List</h4>
+
+        <form style="float:right">
+          <div class="input-group no-border">
+            <input type="text" value="" class="form-control" placeholder="Search...">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <i class="nc-icon nc-zoom-split"></i>
               </div>
             </div>
-          </form>
-       
-      
+          </div>
+        </form>
+
+
       </div>
       <div class="card-body">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -25,24 +25,24 @@
             <th mat-header-cell *matHeaderCellDef> Name </th>
             <td mat-cell *matCellDef="let element"> {{element.name}} </td>
           </ng-container>
-        
+
           <!-- Name Column -->
           <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef> Description </th>
             <td mat-cell *matCellDef="let element"> {{element.description | truncate:15}} </td>
           </ng-container>
-        
+
           <!-- Weight Column -->
           <ng-container matColumnDef="startdate">
             <th mat-header-cell *matHeaderCellDef> Start Date </th>
             <td mat-cell *matCellDef="let element"> {{element.startdate| date: 'MM/dd/yyyy'}} </td>
           </ng-container>
-        
+
           <ng-container matColumnDef="duedate">
             <th mat-header-cell *matHeaderCellDef> End Date </th>
             <td mat-cell *matCellDef="let element"> {{element.duedate|date: 'MM/dd/yyyy'}} </td>
           </ng-container>
-          
+
           <ng-container matColumnDef="percentage">
             <th mat-header-cell *matHeaderCellDef> Percentage </th>
             <td mat-cell *matCellDef="let element"> {{element.percentage}} </td>
@@ -56,19 +56,19 @@
             <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
           </ng-container>
           <ng-container matColumnDef="timer">
-              <th mat-header-cell *matHeaderCellDef> Remaining time for now</th>
-              <td mat-cell *matCellDef="let row"> 
-                 <app-timer [startdate]='row.startdate' [enddate] = 'row.duedate'></app-timer>
-                </td>          
+            <th mat-header-cell *matHeaderCellDef> Remaining time for now</th>
+            <td mat-cell *matCellDef="let row">
+              <app-timer [startdate]='row.startdate' [enddate]='row.duedate'></app-timer>
+            </td>
           </ng-container>
           <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef>  </th>
-              <td mat-cell *matCellDef="let row"> 
-                 <button mat-button (click)="deleteTask(row)">Delete</button>
-                 <button mat-button (click)="updateTask(row)">Update</button>
-                </td>          
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-button (click)="deleteTask(row)">Delete</button>
+              <button mat-button (click)="updateTask(row)">Update</button>
+            </td>
           </ng-container>
-        
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
