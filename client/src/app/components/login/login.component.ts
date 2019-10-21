@@ -36,9 +36,12 @@ export class LoginComponent implements OnInit {
         let token = res.data.token;
         let fullName = res.data.name;
         let username = this.myForm.value.userData.username;
+        let role = res.data.role;
+
         localStorage.setItem('token', token);
         localStorage.setItem('name', fullName);
         localStorage.setItem('username', username);
+        localStorage.setItem('role', role);
         this.router.navigate(['/task']);
 
       } else {
