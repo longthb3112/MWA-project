@@ -101,6 +101,10 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         default: 'client'
+    },
+    notification: {
+        type: Boolean,
+        default: false
     }
 });
 

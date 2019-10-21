@@ -1,86 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ToastrService } from "ngx-toastr";
+import { UserService } from 'app/services/user.service';
 
 
 @Component({
-    selector: 'notifications-cmp',
-    moduleId: module.id,
-    templateUrl: 'notifications.component.html'
+  selector: 'notifications-cmp',
+  moduleId: module.id,
+  templateUrl: 'notifications.component.html'
 })
 
-export class NotificationsComponent{
-  constructor(private toastr: ToastrService) {}
-  showNotification(from, align) {
-    const color = Math.floor(Math.random() * 5 + 1);
+export class NotificationsComponent implements OnInit {
+  ngOnInit(): void {
+    let user = this.userService.getUserdetail().subscribe((data) => {
+      this.notificationsetting = data.data.notification;
+    });
 
-    switch (color) {
-      case 1:
-        this.toastr.info(
-        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Welcome to <b>Paper Dashboard Angular</b> - a beautiful bootstrap dashboard for every web developer.</span>',
-          "",
-          {
-            timeOut: 4000,
-            closeButton: true,
-            enableHtml: true,
-            toastClass: "alert alert-info alert-with-icon",
-            positionClass: "toast-" + from + "-" + align
-          }
-        );
-        break;
-      case 2:
-        this.toastr.success(
-          '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Welcome to <b>Paper Dashboard Angular</b> - a beautiful bootstrap dashboard for every web developer.</span>',
-          "",
-          {
-            timeOut: 4000,
-            closeButton: true,
-            enableHtml: true,
-            toastClass: "alert alert-success alert-with-icon",
-            positionClass: "toast-" + from + "-" + align
-          }
-        );
-        break;
-      case 3:
-        this.toastr.warning(
-        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Welcome to <b>Paper Dashboard Angular</b> - a beautiful bootstrap dashboard for every web developer.</span>',
-          "",
-          {
-            timeOut: 4000,
-            closeButton: true,
-            enableHtml: true,
-            toastClass: "alert alert-warning alert-with-icon",
-            positionClass: "toast-" + from + "-" + align
-          }
-        );
-        break;
-      case 4:
-        this.toastr.error(
-        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Welcome to <b>Paper Dashboard Angular</b> - a beautiful bootstrap dashboard for every web developer.</span>',
-          "",
-          {
-            timeOut: 4000,
-            enableHtml: true,
-            closeButton: true,
-            toastClass: "alert alert-danger alert-with-icon",
-            positionClass: "toast-" + from + "-" + align
-          }
-        );
-        break;
-      case 5:
-        this.toastr.show(
-        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Welcome to <b>Paper Dashboard Angular</b> - a beautiful bootstrap dashboard for every web developer.</span>',
-          "",
-          {
-            timeOut: 4000,
-            closeButton: true,
-            enableHtml: true,
-            toastClass: "alert alert-primary alert-with-icon",
-            positionClass: "toast-" + from + "-" + align
-          }
-        );
-        break;
-      default:
-        break;
-    }
+  }
+  constructor(private toastr: ToastrService, private userService: UserService) { }
+
+
+  notificationsetting: Boolean;
+
+  changeNotificationSetting(e) {
+
+    this.userService.updateNotificationSetting({ uname: localStorage.getItem('username'), notification: this.notificationsetting }).subscribe(() => {
+
+      this.showNotification('top', 'center', 'Notification Setting Changed...')
+      //this.notificationsetting = ;
+
+    });
+
+
+  }
+
+  showNotification(from, align, msg) {
+
+    this.toastr.show(
+      '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message"><br />' + msg + '<br/><br/></span>',
+      "",
+      {
+        timeOut: 4000,
+        closeButton: true,
+        enableHtml: true,
+        toastClass: "alert alert-primary alert-with-icon",
+        positionClass: "toast-" + from + "-" + align
+      }
+    );
   }
 }

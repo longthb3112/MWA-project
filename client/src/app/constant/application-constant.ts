@@ -7,14 +7,15 @@ export class ApplicationConstants {
         signup: '/api/signup',
         getuser: '/api/user',
         updateuser: '/api/user',
-        updatepic:'/api/updatepic',
-        deletetask:'/api/user/removetask/',
-        edittask:'/api/user/edittask',
-        searchtask:'/api/usertask/findbyname',
-        findalltask:'/api/useralltasks',
-        addtask:'/api/user/addtask',
-		findAllUsers: '/api/users',
+        updatepic: '/api/updatepic',
+        deletetask: '/api/user/removetask/',
+        edittask: '/api/user/edittask',
+        searchtask: '/api/usertask/findbyname',
+        findalltask: '/api/useralltasks',
+        addtask: '/api/user/addtask',
+        findAllUsers: '/api/users',
         statuschange: '/api/statuschange',
-        searchbyname: '/api/searchbyname'
+        searchbyname: '/api/searchbyname',
+        settingchange: '/api/settingchange'
     }
 }
