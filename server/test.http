@@ -14,10 +14,11 @@ POST http://localhost:8000/api/signup
 content-type:application/json
 
 {
-    "username":"longuser",
+    "username":"longadmin",
     "firstname":"Long",
     "lastname":"Tran",
-    "email":"email4@gmail.com",
+    "email":"hbtran@mum.edu",
+    "role":"admin",
     "password":"123",
     "imageUrl":"profile-pics/profile-pic01.png",
     "description":"short description about user",
@@ -26,7 +27,7 @@ content-type:application/json
             "name": "task44",
             "description":"task 1 s description",
             "startdate":"2019-10-27",
-            "duedate":"2019-10-29"         
+            "duedate":"2019-10-29"        
         }
     ]
 }

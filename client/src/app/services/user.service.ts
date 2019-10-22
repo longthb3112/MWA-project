@@ -61,6 +61,8 @@ export class UserService {
   searchByName(data): Observable<any> {
     return this.apiService.post(ApplicationConstants.API_PATH.searchbyname, data);
   }
-
+  sendemailreminder(): Observable<any> {
+    return this.apiService.get(ApplicationConstants.API_PATH.sendemailreminder, new HttpParams());
+  }
 
 }

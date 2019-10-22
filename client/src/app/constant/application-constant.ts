@@ -16,6 +16,7 @@ export class ApplicationConstants {
         findAllUsers: '/api/users',
         statuschange: '/api/statuschange',
         searchbyname: '/api/searchbyname',
-        settingchange: '/api/settingchange'
+        settingchange: '/api/settingchange',
+        sendemailreminder:'/api/sendemailreminder'
     }
 }

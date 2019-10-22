@@ -32,13 +32,6 @@ export class UsersComponent implements OnInit {
 
       this.dataSource = result;
     });
-
-
-
-
-
-
-
   }
   msg: String;
   toggleAccountStatus(e, id, status) {
@@ -50,7 +43,6 @@ export class UsersComponent implements OnInit {
   }
 
   showNotification(from, align, msg) {
-
     this.toastr.show(
       '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message"><br />' + msg + '<br/><br/></span>',
       "",
@@ -78,7 +70,11 @@ export class UsersComponent implements OnInit {
       this.dataSource = result;
     });
   }
-
+  sendReminder(){
+    this.userService.sendemailreminder().subscribe(result => {
+      this.showNotification('top', 'center', 'All Reminders Sent')
+    });
+  }
 }
 
 

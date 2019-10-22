@@ -18,7 +18,6 @@ export class ApiInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${this.authService.getToken()}`,
       }
     });
-    console.log("intercepter");
     return next.handle(request);
   }
 }

@@ -37,7 +37,7 @@ ngOnInit(){
     },1000)
   }
   calculateTime(){
-    var remainTime = new Date(this.endate).valueOf() - Date.now().valueOf();
+    var remainTime = moment(this.endate).valueOf() - Date.now().valueOf();
     if(remainTime> 0){
         this.isLate = false;
         var now = moment();

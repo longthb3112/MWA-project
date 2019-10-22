@@ -3,8 +3,9 @@
         <div class="card">
             <div class="card-header">
 
-                <h4 class="card-title" style="float:left"> User List</h4>
-
+                <h4 class="card-title" style="float:left"> User List
+                </h4>
+                <button class="btn btn-primary" style="margin-left:10px" (click)="sendReminder()">Send Reminder</button>
                 <form [formGroup]="searchForm" (ngSubmit)="search()" style="float:right">
                     <div class="input-group no-border">
                         <input type="text" value="" class="form-control" placeholder="Search..."

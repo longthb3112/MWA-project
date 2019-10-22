@@ -215,10 +215,12 @@ module.exports.findUserWithOverduedateTask = async (req, res) => {
     let data = req.body;
     var currentDate = moment().toDate();
    
-    const users = await User.find({"role":"client","accountStatus":true})
+    const users = await User.find({"role":"client","accountStatus":true,"notification":true})
                             .where("tasks.status").equals(0)
                             .where("tasks.duedate").lt(currentDate);
     const result = [];
+    console.log("test");
+    console.log(users)
     if (users) {
         for (let user of users){
             var item = {email:user.email, tasks:[]};
@@ -269,7 +271,7 @@ module.exports.findUserWithOverduedateTask = async (req, res) => {
             }  
         
             var emailContent = `
-            <h1>TASKS OVER DUEDATE</h1><br><br>
+            <h1>TASKS OVER DUEDATE</h1>
             <table border="1" cellpadding="0" cellspacing="0" width="100%">
             <tr>
              <th>
