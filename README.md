@@ -1,4 +1,4 @@
-# Personal Management Task
+# Personal Task Management
 
 * Manage your personal tasks
 * Manage user accounts
