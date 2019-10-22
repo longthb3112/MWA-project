@@ -12,9 +12,9 @@ This project is built in both server side and front end side. These instructions
 
 ### Prerequisites
 
-Node v12.11.0
-Angular v8
-MongoDB 3.3.2
+* Node v12.11.0
+* Angular v8
+* MongoDB 3.3.2
 ```
 
 ### Installing
