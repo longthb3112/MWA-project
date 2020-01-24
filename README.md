@@ -19,8 +19,8 @@ This project is built in both server side and front end side. These instructions
 
 ### Installing
 
-client folder : npm i , node app
-server foler  : npm i, ngserve -ng serve --proxy-config src/proxy.config.json
+server folder : npm i , node app
+client foler  : npm i, ngserve -ng serve --proxy-config src/proxy.config.json
 
 ```
 
