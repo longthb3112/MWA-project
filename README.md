@@ -20,7 +20,7 @@ This project is built in both server side and front end side. These instructions
 ### Installing
 
 server folder : npm i , node app
-client foler  : npm i, ngserve -ng serve --proxy-config src/proxy.config.json
+client foler  : npm i, ng serve --proxy-config src/proxy.config.json
 
 ```
 
