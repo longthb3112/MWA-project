@@ -237,12 +237,12 @@ module.exports.findUserWithOverduedateTask = async (req, res) => {
         }
         var transporter = nodemailer.createTransport({
             pool:true,
-            host: "mail.cuidot.vn",
+            host: "Need to update with mail server information",
             port: 465,
             secure: true, // use TLS
-            auth: {
-              user: "longtran@cuidot.vn",
-              pass: "Mwa@123"
+            auth: { 
+              user: "Need to update with mail server information", 
+              pass: "Need to update with mail server information"
             }
           });
     
